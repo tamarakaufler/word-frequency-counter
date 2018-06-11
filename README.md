@@ -11,7 +11,7 @@ A pool of workers (gouroutines) is processing tasks (jobs) sent to the jobs
 channel until all is done.
 
 ## Usage
-go run main.com -file=$file_path -workers=5
+go run main.com -file=$file_path -workers=$no_of_gouroutines
 
 where
   - file ...... absolute or relative path of the file to be processed
