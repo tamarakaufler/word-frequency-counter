@@ -2,6 +2,10 @@
 Word Frequency Counter is a CLI tool for finding
 word occurence in provided text.
 
+ - Go
+ - concurrency
+ - worker pool
+
 ## Synopsis
 Word Frequency Counter is implemented in Go, taking advantage
 of concurrency through the use of goroutines and channels. 
