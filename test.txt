@@ -1,0 +1,19 @@
+Filesystems have different restrictions. The maximum length or the charset allowed may vary. Unfortunately, there is no way you can tell (not as far as I know at least) which filesystem(s) your path will traverse.
+
+Filesystems have different restrictions. The maximum length or the charset allowed may vary. Unfortunately, there is no way you can tell (not as far as I know at least) which filesystem(s) your path will traverse.
+
+
+The main benefit of this solution is that it is straightforward and more accurate. If a file already exists or can be created at a given path, it means it is valid. However, this solution can also invalidate valid paths because of restricted access.
+
+Summary
+The first solution will be less accurate than the second one, even though more correct from a puristic point of view. The solution you should pick up depends on your need. Do you prefer false positives or false negatives? The first solution can give you false positives, while the second one false negatives.
+
+Filesystems have different restrictions. The maximum length or the charset allowed may vary. Unfortunately, there is no way you can tell (not as far as I know at least) which filesystem(s) your path will traverse.
+
+Filesystems have different restrictions. The maximum length or the charset allowed may vary. Unfortunately, there is no way you can tell (not as far as I know at least) which filesystem(s) your path will traverse.
+
+
+The main benefit of this solution is that it is straightforward and more accurate. If a file already exists or can be created at a given path, it means it is valid. However, this solution can also invalidate valid paths because of restricted access.
+
+Summary
+The first solution will be less accurate than the second one, even though more correct from a puristic point of view. The solution you should pick up depends on your need. Do you prefer false positives or false negatives? The first solution can give you false positives, while the second one false negatives.
