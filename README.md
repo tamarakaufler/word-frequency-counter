@@ -17,6 +17,10 @@ channel until all is done.
 ## Usage
 go run main.com -file=$file_path -workers=$no_of_gouroutines
 
+docker run --name=wordcounter --rm -v $PWD:/data quay.io/tamarakaufler/wordcounter:v1alpha1 --file=/data/some_file.txt --workers=4
+
+  where some_file.txt is a file in the directory from which the docker command is run.
+
 where
   - file ...... absolute or relative path of the file to be processed
   - workers ... number of workers processing the file content

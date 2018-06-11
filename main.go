@@ -16,7 +16,7 @@ var (
 
 func init() {
 	flag.IntVar(&workers, "workers", 2, "workers flag sets the number of workers in the pool")
-	flag.StringVar(&file, "file", "./test.txt", "Path to the file to be processed. Path can be relative.")
+	flag.StringVar(&file, "file", "test.txt", "Path to the file to be processed. Path can be relative.")
 }
 
 func main() {
