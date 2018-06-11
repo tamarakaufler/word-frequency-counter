@@ -1,6 +1,6 @@
 # word-frequency-counter
 Word Frequency Counter is a CLI tool for finding
-word occurence in provided text.
+word occurences in provided text.
 
  - Go
  - concurrency
