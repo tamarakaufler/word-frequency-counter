@@ -5,6 +5,7 @@ word occurences in provided text.
  - Go
  - concurrency
  - worker pool
+ - reduce
 
 ## Synopsis
 Word Frequency Counter is implemented in Go, taking advantage
