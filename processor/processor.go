@@ -15,8 +15,7 @@ import (
 var (
 	ErrIncorrectInput     = "Incorrect input: %s"
 	ContentSeparatorRegex = regexp.MustCompile(`\s*\.\s*`)
-	SegmentSeparatorRegex = regexp.MustCompile(`\s+`)
-	SegmentCleanupRegex   = regexp.MustCompile(`.*?([a-zA-Z0-9]{2,}).*`)
+	WordRegex             = regexp.MustCompile(`\s*([\pL\d]*\pL{2,}[\pL\d]*)\s*`)
 )
 
 type job struct {
@@ -108,7 +107,7 @@ func (p *Processor) sendjob(segments []string) {
 
 func (p *Processor) worker(i int) {
 	for j := range p.jobs {
-		sr := process(SegmentSeparatorRegex, SegmentCleanupRegex, j.segment)
+		sr := process(WordRegex, j.segment)
 		if len(sr) == 0 {
 			continue
 		}
@@ -167,21 +166,19 @@ func preprocess(re *regexp.Regexp, content string) []string {
 }
 
 // process processes a segment
-func process(sep *regexp.Regexp, clean *regexp.Regexp, segment string) map[string]int {
+func process(sep *regexp.Regexp, segment string) map[string]int {
 	processed := make(map[string]int)
-	parts := sep.Split(segment, -1)
+	parts := sep.FindAllStringSubmatch(segment, -1)
+
 	if len(parts) == 0 {
 		return nil
 	}
-	for _, p := range parts {
-		if len(p) < 2 {
-			continue
-		}
-		p = strings.ToLower(p)
 
-		p = clean.ReplaceAllString(p, "$1")
-		if p != "" {
-			processed[p]++
+	for _, p := range parts {
+		pp := strings.ToLower(p[1])
+
+		if pp != "" {
+			processed[pp]++
 		}
 	}
 

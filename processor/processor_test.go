@@ -70,7 +70,6 @@ func Test_preprocess(t *testing.T) {
 func Test_process(t *testing.T) {
 	type args struct {
 		sep     *regexp.Regexp
-		clean   *regexp.Regexp
 		segment string
 	}
 	tests := []struct {
@@ -82,8 +81,7 @@ func Test_process(t *testing.T) {
 		{
 			name: "Processing sentence containing only lowercase letters",
 			args: args{
-				sep:     SegmentSeparatorRegex,
-				clean:   SegmentCleanupRegex,
+				sep:     WordRegex,
 				segment: "I am here just now, just now",
 			},
 			want: map[string]int{
@@ -97,8 +95,7 @@ func Test_process(t *testing.T) {
 		{
 			name: "Processing sentence containing lower and uppercase letters",
 			args: args{
-				sep:     SegmentSeparatorRegex,
-				clean:   SegmentCleanupRegex,
+				sep:     WordRegex,
 				segment: "I am here just now, Just Now",
 			},
 			want: map[string]int{
@@ -112,13 +109,12 @@ func Test_process(t *testing.T) {
 		{
 			name: "Processing sentence containing letters and numbers",
 			args: args{
-				sep:     SegmentSeparatorRegex,
-				clean:   SegmentCleanupRegex,
+				sep:     WordRegex,
 				segment: "I am 123 here just5 now, Just5 Now",
 			},
 			want: map[string]int{
-				"am":    1,
-				"123":   1,
+				"am": 1,
+				//"123":   1,
 				"here":  1,
 				"just5": 2,
 				"now":   2,
@@ -128,13 +124,12 @@ func Test_process(t *testing.T) {
 		{
 			name: "Processing sentence containing letters, numbers and non word characters",
 			args: args{
-				sep:     SegmentSeparatorRegex,
-				clean:   SegmentCleanupRegex,
+				sep:     WordRegex,
 				segment: "I am% 123 - here just5 :now, Just5 'Now",
 			},
 			want: map[string]int{
-				"am":    1,
-				"123":   1,
+				"am": 1,
+				//"123":   1,
 				"here":  1,
 				"just5": 2,
 				"now":   2,
@@ -143,7 +138,7 @@ func Test_process(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := process(tt.args.sep, tt.args.clean, tt.args.segment); !reflect.DeepEqual(got, tt.want) {
+			if got := process(tt.args.sep, tt.args.segment); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("process() = %v, want %v", got, tt.want)
 			}
 		})
